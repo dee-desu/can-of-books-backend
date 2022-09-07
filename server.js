@@ -12,7 +12,8 @@ const { response } = require('express');
 
 // mongoose config
 
-mongoose.connect('mongodb://localhost:27017/Books', {useNewUrlParser: true, useUnifiedTopology: true});
+const dbLink = process.env.MONGODB
+mongoose.connect(`${dbLink}`, {useNewUrlParser: true, useUnifiedTopology: true});
 
 const booksSchema = new mongoose.Schema({
   title: String,
@@ -49,7 +50,7 @@ async function seedData() {
   
 }
 
-  seedData();
+  //  seedData();
 
 
 const PORT = process.env.PORT;
@@ -77,8 +78,85 @@ function booksRouteHandler(req,res){
 app.get('/test', (req,res) => {
 
   res.send('test request received')
-
 })
+
+
+app.post('/books', addBookHandler);
+
+async function addBookHandler(req,res) {
+
+  const {title,description,status} = req.body;
+  
+  await book.create({ 
+    title : title,
+    description : description,
+    status : status
+  });
+   
+  book.find({},(err,result)=>{
+      if(err)
+      {
+          console.log(err);
+      }
+      else
+      {  
+          // console.log(result);
+          res.send(result);
+      }
+  })
+}
+
+app.delete('/books/:id',deleteBookHandler);
+ 
+function deleteBookHandler(req,res) { 
+  const bookId = req.params.id; 
+  book.deleteOne({_id:bookId},(err,result)=>{
+      
+      book.find({},(err,result)=>{ 
+          if(err)
+          {
+              console.log(err);
+          }
+          else
+          {
+              // console.log(result);
+              res.send(result);
+          }
+      })
+
+  })
+  
+}
+
+
+app.put('/books/:id',updateBookHandler);
+
+function updateBookHandler(req, res){
+  const id = req.params.id;
+  const {title,description,status} = req.body;
+
+  book.findByIdAndUpdate(id, {title,description,status}, (err, result) => {
+    if(err){
+      console.log(err);
+    } else {
+      book.find({},(err,result)=>{ 
+        if(err)
+        {
+            console.log(err);
+        }
+        else
+        {
+            res.send(result);
+        }
+    })
+    }
+  })
+
+}
+
+
+
+
 
 app.get('*', errorRouteHandler)
 
@@ -87,3 +165,18 @@ function errorRouteHandler(req,res){
 }
 
 app.listen(PORT, () => console.log(`listening on ${PORT}`));
+
+
+// app.get('/test', (req,res) => {
+
+//   res.send('test request received')
+
+// })
+
+// app.get('*', errorRouteHandler)
+
+// function errorRouteHandler(req,res){
+//   res.send('404 PAGE NOT FOUND!') 
+// }
+
+// app.listen(PORT, () => console.log(`listening on ${PORT}`));
