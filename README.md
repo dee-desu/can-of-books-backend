@@ -1,11 +1,38 @@
-# Start your own "Can of Books" App
+# Project Name
 
-This repository has starter code to begin work on creating your own online bookshelf.
+**Author**: Omar Darwish
+**Version**: 1.0.0
 
-## What can books do?
+## Overview
 
-Books are life-changing. They have the power to enlighten, educate, entertain, heal, and help us grow. Build out this code base to create an web app to track what books have impacted you, and what's recommended to read next.
+A web application that lets you see the recommended books
 
-## Use this template
+## Getting Started
 
-Clone this repo to your own account with the green "Use this template" button. Then, add any collaborators. Now you are ready to start adding features! Deploy your site to let the world know which books have had the greatest impact on you, and what's recommended. Enjoy!
+1. Create Server
+2. Create a data base
+3. Make the server be able to send request to the data base
+4. send request to the server from the front end 
+
+
+## Architecture
+
+
+
+## Change Log
+
+06-09-2022 2:00 am - app has express and mongoose operating 
+ 
+## Estimates
+
+Name of feature: server and mongoDB
+
+Estimate of time needed to complete: 3 hrs
+
+Start time: 10:00 pm
+
+Finish time: 2:00 am
+
+Actual time needed to complete: 4 hrs
+
+

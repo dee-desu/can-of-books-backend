@@ -6,9 +6,11 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const app = express();
 app.use(cors());
+app.use(express.json())
+const { response } = require('express');
 
 
-//----- mongoose configs -----//
+// mongoose config
 
 mongoose.connect('mongodb://localhost:27017/Books', {useNewUrlParser: true, useUnifiedTopology: true});
 
