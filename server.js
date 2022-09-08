@@ -23,7 +23,7 @@ const booksSchema = new mongoose.Schema({
 
 const book = mongoose.model('Books', booksSchema);
  
-// Seed data
+// Seed 
 async function seedData() {
   const firstBook = new book({
     title: "The Alchemist",
@@ -100,7 +100,7 @@ async function addBookHandler(req,res) {
       }
       else
       {  
-          // console.log(result);
+    
           res.send(result);
       }
   })
@@ -119,7 +119,7 @@ function deleteBookHandler(req,res) {
           }
           else
           {
-              // console.log(result);
+              
               res.send(result);
           }
       })
