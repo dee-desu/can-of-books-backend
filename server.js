@@ -12,7 +12,7 @@ const { response } = require('express');
 
 // mongoose config
 
-const dbLink = process.env.MONGODB
+const dbLink = process.env.MONGODB //adding the mongodb from the .env 
 mongoose.connect(`${dbLink}`, {useNewUrlParser: true, useUnifiedTopology: true});
 
 const booksSchema = new mongoose.Schema({
